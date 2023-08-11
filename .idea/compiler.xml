@@ -7,9 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
         <module name="reservation" />
         <module name="guest" />
         <module name="payment" />
+        <module name="discovery-server" />
         <module name="room" />
       </profile>
     </annotationProcessing>
@@ -19,6 +21,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
+      <module name="discovery-server" options="-parameters" />
       <module name="guest" options="-parameters" />
       <module name="payment" options="-parameters" />
       <module name="reservation" options="-parameters" />

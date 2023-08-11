@@ -10,6 +10,8 @@ services:
       JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
     depends_on:
       - "kafka"
+    networks:
+      - smarthomestay
   kafka:
     image: obsidiandynamics/kafka
     restart: "no"
@@ -25,3 +27,9 @@ services:
       KAFKA_RESTART_ATTEMPTS: "10"
       KAFKA_RESTART_DELAY: "5"
       ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: "0"
+    networks:
+      - smarthomestay
+
+
+networks:
+  smarthomestay:

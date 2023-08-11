@@ -7,17 +7,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/guests")
 @RequiredArgsConstructor
 public class GuestController {
     private final GuestService guestService;
 
-    @GetMapping("")
+    @GetMapping("/v1/guests")
     public List<Guest> GetGuests() {
         return guestService.GetAllGuests();
     }
 
-    @PostMapping("")
+    @PostMapping("/v1/guests")
     public ResponseEntity<Guest> addNewGuest(@RequestBody GuestRequest guest) throws Exception {
         return ResponseEntity.ok(guestService.AddGuest(guest));
     }

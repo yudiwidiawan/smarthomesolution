@@ -9,30 +9,29 @@ import tritronik.test.room.query.SearchRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/rooms")
 public class RoomController {
     
     @Autowired
     private RoomService roomService;
 
-    @PostMapping(value = "/search")
-    public Page<Room> search(@RequestBody SearchRequest request) {
-        return roomService.searchRoom(request);
-    }
+//    @PostMapping(path = "/v1/rooms", value = "/search")
+//    public Page<Room> search(@RequestBody SearchRequest request) {
+//        return roomService.searchRoom(request);
+//    }
 
-    @GetMapping
+    @GetMapping(path = "/v1/rooms")
     @ResponseBody
     public List<Room> getAllRooms() {
             
         return roomService.getAllRooms();
     }
 
-    @PostMapping("")
+    @PostMapping(path = "/v1/rooms")
     public ResponseEntity<Room> addNewRoom(@RequestBody RoomRequest room) throws Exception {
         return ResponseEntity.ok(roomService.addRoom(room));
     }
 
-    @GetMapping("/{roomId}/price")
+    @GetMapping(path = "/v1/rooms/{roomId}/price")
     public Float getRoomPrice(@PathVariable("roomId") Long roomId) {
         return roomService.getRoomPrice(roomId);
     }

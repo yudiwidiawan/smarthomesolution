@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  room-database:
+    image: mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - room-network
+      - smarthomestay
+    environment:
+      MYSQL_ROOT_PASSWORD: password123
+      MYSQL_PASSWORD: password123
+      MYSQL_DATABASE: room
+      PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/bin
+      GOSU_VERSION: 1.16
+      MYSQL_MAJOR: innovation
+      MYSQL_VERSION: 8.1.0-1.el8
+      MYSQL_SHELL_VERSION: 8.0.34-1.el8
+    volumes:
+      - /var/lin/mysql
+
+  room-service:
+    image: yudiwidiawan/room:0.0.1-SNAPSHOT
+    ports:
+      - "8881:8881"
+    networks:
+      - room-network
+      - smarthomestay
+    environment:
+      SPRING.DATASOURCE.URL: jdbc:mysql://room-database:3306/room?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING.DATASOURCE.USERNAME: root
+      SPRING.DATASOURCE.PASSWORD: password123
+    depends_on:
+      - room-database
+
+networks:
+  room-network:
+  smarthomestay:
